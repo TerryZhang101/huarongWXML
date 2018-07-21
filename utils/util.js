@@ -1,3 +1,5 @@
+var app = getApp()
+
 function formatTime(date) {
   var year = date.getFullYear()
   var month = date.getMonth() + 1
@@ -16,18 +18,42 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
-function http(url,req_data,callBack) {
+function http(url, req_data, callBack) {
+
+  req_data.channel = app.globalData.channel;
+  req_data.nonce_str = app.globalData.nonce_str;
+  req_data.sign = app.globalData.sign;
+
   wx.request({
     url: url,
     method: 'POST',
-    data:req_data,
+    data: req_data,
     header: {
       "content-type": "application/json"
     },
-    success: function (res) {
+    success: function(res) {
       callBack(res);
     },
-    fail: function (error) {
+    fail: function(error) {
+      console.log(error)
+    }
+  })
+}
+
+
+function ajax(url, req_data, callBack) {
+
+  wx.request({
+    url: url,
+    method: 'POST',
+    data: req_data,
+    header: {
+      "content-type": "application/json"
+    },
+    success: function(res) {
+      callBack(res);
+    },
+    fail: function(error) {
       console.log(error)
     }
   })
@@ -35,5 +61,6 @@ function http(url,req_data,callBack) {
 
 module.exports = {
   http: http,
+  ajax: ajax,
   formatTime: formatTime
 }

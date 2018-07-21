@@ -128,6 +128,9 @@ App({
     shareProfile: '百款精品商品，总有一款适合您',// 首页转发的时候话术
     apiBase: "http://localhost:8082/huarongIm",
     channel:"s0001",
+    nonce_str:"000",
+    sign:"000",
+
   }
   /*
   根据自己需要修改下单时候的模板消息内容设置，可增加关闭订单、收货时候模板消息提醒；
